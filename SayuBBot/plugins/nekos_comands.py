@@ -14,7 +14,7 @@ commands = [
         'smallboobs', 'hug', 'ero', 'smug', 'goose', 'baka', 'woof'
     ]
 
-format_imgs = ["png", "jpg"]
+format_imgs = ["png", "jpg", "jpeg"]
 
 
 @Client.on_message(filters.command([i for i in commands]))
