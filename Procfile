@@ -1,1 +1,1 @@
-web: python3 SayBot/main.py
+web: python3 SayuBBot/main.py
