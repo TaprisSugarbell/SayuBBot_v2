@@ -15,7 +15,6 @@ commands = [
     ]
 
 format_imgs = ["png", "jpg"]
-gif = ["gif"]
 
 
 @Client.on_message(filters.command([i for i in commands]))
