@@ -1,18 +1,22 @@
 import re
 import nekos
+import pyrogram.errors
 from pyrogram import Client, filters
+from ..helper.utils import send_image
 
 commands = [
-        'feet', 'yuri', 'trap', 'futanari', 'hololewd', 'lewdkemo',
-        'solog', 'feetg', 'cum', 'erokemo', 'les', 'wallpaper', 'lewdk',
-        'ngif', 'tickle', 'lewd', 'feed', 'gecg', 'eroyuri', 'eron',
-        'cum_jpg', 'bj', 'nsfw_neko_gif', 'solo', 'kemonomimi', 'nsfw_avatar',
-        'gasm', 'poke', 'anal', 'slap', 'hentai', 'avatar', 'erofeet', 'holo',
-        'keta', 'blowjob', 'pussy', 'tits', 'holoero', 'lizard', 'pussy_jpg',
-        'pwankg', 'classic', 'kuni', 'waifu', 'pat', '8ball', 'kiss', 'femdom',
-        'neko', 'spank', 'cuddle', 'erok', 'fox_girl', 'boobs', 'random_hentai_gif',
-        'smallboobs', 'hug', 'ero', 'smug', 'goose', 'baka', 'woof'
-    ]
+    '8ball', 'anal', 'avatar', 'baka', 'bj', 'blowjob',
+    'boobs', 'classic', 'cuddle', 'cum', 'cum_jpg', 'ero',
+    'erofeet', 'erok', 'erokemo', 'eron', 'eroyuri', 'feed',
+    'feet', 'feetg', 'femdom', 'fox_girl', 'futanari', 'gasm',
+    'gecg', 'goose', 'hentai', 'holo', 'holoero', 'hololewd', 'hug',
+    'kemonomimi', 'keta', 'kiss', 'kuni', 'les', 'lewd', 'lewdk',
+    'lewdkemo', 'lizard', 'neko', 'ngif', 'nsfw_avatar', 'nsfw_neko_gif',
+    'pat', 'poke', 'pussy', 'pussy_jpg', 'pwankg', 'random_hentai_gif',
+    'slap', 'smallboobs', 'smug', 'solo', 'solog', 'spank', 'tickle', 'tits',
+    'trap', 'waifu', 'wallpaper', 'woof', 'yuri'
+]
+
 
 format_imgs = ["png", "jpg", "jpeg"]
 
@@ -25,8 +29,12 @@ async def __nekos__(bot, update):
     n = nekos.img(text)
     print(n)
     if n.split(".")[-1] in format_imgs:
-        await bot.send_photo(chat_id,
-                             photo=n)
+        try:
+            await bot.send_photo(chat_id,
+                                 photo=n)
+        except pyrogram.errors.exceptions.bad_request_400.WebpageCurlFailed:
+            dats = (bot, chat_id)
+            await send_image(dats, n)
     elif n.split(".")[-1] == "gif":
         await bot.send_animation(chat_id,
                                  animation=n)
