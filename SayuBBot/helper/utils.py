@@ -42,7 +42,7 @@ async def send_image(dats, url, suffix=""):
         stck_file = tempfile.NamedTemporaryFile(suffix=".webp", dir=temp_dir)
         img.save(stck_file.name, "webp")
         await bot.send_sticker(chat_id,
-                               stck_file.read())
+                               open(stck_file.name, "rb"))
     else:
         await bot.send_photo(chat_id,
                              open(img_file.name, "rb"))
