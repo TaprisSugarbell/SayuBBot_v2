@@ -37,6 +37,5 @@ async def send_image(dats, url):
     temp_dir = f"{os.getcwd()}/temp/"
     img_file = tempfile.NamedTemporaryFile(suffix=f".{ext}", dir=temp_dir)
     img_file.write(requests.get(url).content)
-    img = Image.open(img_file.name)
     await bot.send_photo(chat_id,
-                         img)
+                         open(img_file.name, "wb"))
