@@ -30,8 +30,10 @@ async def __nekos__(bot, update):
     print(n)
     if n.split(".")[-1] in format_imgs:
         try:
-            await bot.send_photo(chat_id,
-                                 photo=n)
+            dats = (bot, chat_id)
+            await send_image(dats, n)
+            # await bot.send_photo(chat_id,
+            #                      photo=n)
         except pyrogram.errors.exceptions.bad_request_400.WebpageCurlFailed:
             dats = (bot, chat_id)
             await send_image(dats, n)
