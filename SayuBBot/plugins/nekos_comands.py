@@ -28,14 +28,18 @@ async def __nekos__(bot, update):
     text = re.sub(r"/", "", update.text)
     n = nekos.img(text)
     print(n)
-    if n.split(".")[-1] in format_imgs:
-        try:
-            await bot.send_photo(chat_id,
-                                 photo=n)
-        except pyrogram.errors.exceptions.bad_request_400.WebpageCurlFailed:
-            dats = (bot, chat_id)
-            await send_image(dats, n)
-    elif n.split(".")[-1] == "gif":
-        await bot.send_animation(chat_id,
-                                 animation=n)
+    if text == "gasm":
+        dats = (bot, chat_id)
+        await send_image(dats, n, "webp")
+    else:
+        if n.split(".")[-1] in format_imgs:
+            try:
+                await bot.send_photo(chat_id,
+                                     photo=n)
+            except pyrogram.errors.exceptions.bad_request_400.WebpageCurlFailed:
+                dats = (bot, chat_id)
+                await send_image(dats, n)
+        elif n.split(".")[-1] == "gif":
+            await bot.send_animation(chat_id,
+                                     animation=n)
 
