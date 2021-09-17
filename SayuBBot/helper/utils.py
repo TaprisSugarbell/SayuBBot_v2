@@ -38,4 +38,4 @@ async def send_image(dats, url):
     img_file = tempfile.NamedTemporaryFile(suffix=f".{ext}", dir=temp_dir)
     img_file.write(requests.get(url).content)
     await bot.send_photo(chat_id,
-                         open(img_file.name, "wb"))
+                         open(img_file.name, "rb"))
