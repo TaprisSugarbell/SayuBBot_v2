@@ -27,8 +27,9 @@ async def __nekos__(bot, update):
     chat_id = update.chat.id
     text = re.sub(r"/", "", update.text)
     n = nekos.img(text)
+    st = ["gasm", "waifu"]
     print(n)
-    if text == "gasm":
+    if text in st:
         dats = (bot, chat_id)
         await send_image(dats, n, "webp")
     else:
